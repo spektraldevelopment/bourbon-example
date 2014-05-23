@@ -1,0 +1,43 @@
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
+section {
+  border: 1px solid #EEEEEE; }
+
+#mainSection {
+  max-width: 68em;
+  margin-left: auto;
+  margin-right: auto; }
+  #mainSection:after {
+    content: "";
+    display: table;
+    clear: both; }
+  #mainSection #userSection {
+    float: left;
+    display: block;
+    margin-right: 2.35765%;
+    width: 23.23176%;
+    margin: 0;
+    padding: 0; }
+    #mainSection #userSection:last-child {
+      margin-right: 0; }
+    #mainSection #userSection #userList {
+      list-style-type: none;
+      margin: 0;
+      padding: 0; }
+  #mainSection #chatSection {
+    float: left;
+    display: block;
+    margin-right: 2.35765%;
+    width: 74.41059%; }
+    #mainSection #chatSection:last-child {
+      margin-right: 0; }
+  #mainSection #messageSection {
+    float: left;
+    display: block;
+    margin-right: 2.35765%;
+    width: 100%; }
+    #mainSection #messageSection:last-child {
+      margin-right: 0; }
