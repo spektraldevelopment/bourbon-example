@@ -1,4 +1,5 @@
-var messageArea = document.querySelector('#messageArea');
+var
+    messageArea = document.querySelector('#messageArea');
 
 attachEventListener(messageArea, 'click', onMessageFocus);
 

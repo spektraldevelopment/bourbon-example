@@ -9,7 +9,6 @@ function onSendMessage(evt) {
     insertMessage('Samuel L. Jackson', 'What?!');
 }
 
-
 function insertMessage(userID, msg) {
 
     var cItem = document.createElement('div');
@@ -33,8 +32,16 @@ function insertMessage(userID, msg) {
 
     chatList.appendChild(cItem);
 
-
+    scrollToLastItem();
     console.log('insertMessage');
+}
+
+function scrollToLastItem() {
+    var chatChildren = chatList.children, i, totalChatHeight = 0;
+    for (i = 0; i < chatChildren.length; i += 1) {
+        totalChatHeight += stringToNum(getStyle(chatChildren[i], 'height'));
+    }
+    chatList.scrollTop = totalChatHeight;
 }
 
 //////////////////
@@ -63,4 +70,25 @@ function detachEventListener(eventTarget, eventType, eventHandler) {
     } else {
         eventTarget["on" + eventType] = null;
     }
+}
+
+//////////////////
+////GET STYLE
+//////////////////
+function getStyle(element, styleProperty) {
+
+    styleProperty = styleProperty || undefined;
+    var style;
+    if(styleProperty !== undefined) {
+        try {
+            style = element.currentStyle[styleProperty];
+        } catch (err) {
+            style = document.defaultView.getComputedStyle(element, null).getPropertyValue(styleProperty);
+        }
+    }
+    return style;
+}
+
+function stringToNum(str) {
+    return parseInt(str, 10);
 }
