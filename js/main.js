@@ -1,6 +1,10 @@
 var
     chatList = document.querySelector('#chatList'),
-    sendButton = document.querySelector('#sendButton');
+    sendButton = document.querySelector('#sendButton'),
+    messageArea = document.querySelector('#messageArea');
+
+
+UIDefaults.textArea(messageArea);
 
 attachEventListener(sendButton, 'click', onSendMessage);
 
