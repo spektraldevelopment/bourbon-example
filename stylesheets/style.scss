@@ -1,31 +1,90 @@
+//Imports
 @import '../bourbon/bourbon';
 @import "../neat/neat";
+@import "../bitters/bitters";
 
-section {
-  border: 1px solid #EEEEEE;
+//Mixins
+@mixin outline($colour:#EEEEEE) {
+  border: 1px solid $colour;
 }
 
+@mixin chatItemStyle($width) {
+  width:$width;
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
 
+//Elements
+section {
+  //@include outline();
+}
+
+//index structure
 #mainSection {
   @include outer-container;
+  @include outline(#9f9f9f);
+  padding: 10px;
+
+  h1 {
+    font-family: $helvetica;
+    font-size:24px;
+  }
   #userSection {
     @include span-columns(3);
     margin: 0;
     padding: 0;
 
-    #userList {
+    ul {
+      background-color: #eeeeee;
       list-style-type: none;
-      margin:0;
-      padding:0;
+      margin:0 10px 0 0;
+      padding:10px;
+
+      li {
+
+      }
     }
   }
 
   #chatSection {
     @include span-columns(9);
+    #chatList {
+
+      height: 200px;
+      overflow-y: scroll;
+
+      .chatItem:nth-child(even) {background: #FFF}
+      .chatItem:nth-child(odd) {background: #eeeeee};
+
+      .chatItem {
+        margin: 0;
+        padding:10px;
+        @include clearfix;
+
+        .chatName {
+          @include span-columns(3);
+        }
+
+        .chatMessage {
+          @include span-columns(7);
+        }
+
+        .chatTime {
+          @include span-columns(2);
+          text-align: right;
+        }
+      }
+    }
   }
 
   #messageSection {
     @include span-columns(12);
+    button {
+      @include button;
+      position: relative;
+      float:right;
+    }
   }
 
 }
