@@ -1,51 +1,112 @@
 var
-    chatList = document.querySelector('#chatList'),
-    sendButton = document.querySelector('#sendButton'),
-    messageArea = document.querySelector('#messageArea');
+    mainSection = document.querySelector('#mainSection'),
+    startScreen = document.querySelector('#startScreen'),
+    nameField = document.querySelector('#enterName'),
+    joinButton = document.querySelector('#joinButton'),
+    users = [], i;
 
+users = [
+    {userID: "Samuel L. Jackson"},
+    {userID: "Frank Underwood"},
+    {userID: "Walter White"}
+]
 
-UIDefaults.textArea(messageArea);
+UIDefaults.input(nameField);
 
-attachEventListener(sendButton, 'click', onSendMessage);
+attachEventListener(joinButton, 'click', onJoin);
 
-function onSendMessage(evt) {
-    console.log('onSendMessage');
-    insertMessage('Samuel L. Jackson', 'What?!');
+function onJoin() {
+    removeElement(startScreen);
+    initChat();
 }
 
-function insertMessage(userID, msg) {
+function initChat() {
 
-    var cItem = document.createElement('div');
-    cItem.setAttribute('class', 'chatItem');
+    //Create user section
+    var userSection = document.createElement('section');
+    userSection.setAttribute('id', 'userSection');
+    mainSection.appendChild(userSection);
 
-    var cName = document.createElement('div');
-    cName.setAttribute('class', 'chatName');
-    cName.innerHTML = userID;
-    cItem.appendChild(cName);
+    var userList = document.createElement('ul');
+    userList.setAttribute('id', 'userList');
+    userSection.appendChild(userList);
 
-    var cMessage = document.createElement('div');
-    cMessage.setAttribute('class', 'chatMessage');
-    cMessage.innerHTML = msg;
-    cItem.appendChild(cMessage);
+    var user;
 
-    var cTime = document.createElement('div');
-    cTime.setAttribute('class', 'chatTime');
-    cTime.innerHTML = '8:00pm';
-
-    cItem.appendChild(cTime);
-
-    chatList.appendChild(cItem);
-
-    scrollToLastItem();
-    console.log('insertMessage');
-}
-
-function scrollToLastItem() {
-    var chatChildren = chatList.children, i, totalChatHeight = 0;
-    for (i = 0; i < chatChildren.length; i += 1) {
-        totalChatHeight += stringToNum(getStyle(chatChildren[i], 'height'));
+    for (i = 0; i < users.length; i += 1) {
+        user = document.createElement('li');
+        user.setAttribute('class', 'user');
+        user.innerHTML = users[i].userID;
+        userList.appendChild(user);
     }
-    chatList.scrollTop = totalChatHeight;
+
+    //Create chat section
+    var chatSection = document.createElement('section');
+    chatSection.setAttribute('id', 'chatSection');
+    mainSection.appendChild(chatSection);
+
+    var chatList = document.createElement('div');
+    chatList.setAttribute('id', 'chatList');
+    chatSection.appendChild(chatList);
+
+    //Create message section
+    var messageSection = document.createElement('section');
+    messageSection.setAttribute('id', 'messageSection');
+    mainSection.appendChild(messageSection);
+
+    var messageArea = document.createElement('textarea');
+    messageArea.setAttribute('id', 'messageArea');
+    messageArea.innerHTML = 'Say Something';
+    UIDefaults.textArea(messageArea);
+    messageSection.appendChild(messageArea);
+
+    var sendButton = document.createElement('button');
+    sendButton.setAttribute('id', 'sendButton');
+    sendButton.setAttribute('type', 'button');
+    sendButton.innerHTML = 'Send';
+    messageSection.appendChild(sendButton);
+
+    attachEventListener(sendButton, 'click', onSendMessage);
+
+    function onSendMessage(evt) {
+        console.log('onSendMessage');
+        insertMessage('Samuel L. Jackson', 'What?!');
+    }
+
+    function insertMessage(userID, msg) {
+
+        var cItem = document.createElement('div');
+        cItem.setAttribute('class', 'chatItem');
+
+        var cName = document.createElement('div');
+        cName.setAttribute('class', 'chatName');
+        cName.innerHTML = userID;
+        cItem.appendChild(cName);
+
+        var cMessage = document.createElement('div');
+        cMessage.setAttribute('class', 'chatMessage');
+        cMessage.innerHTML = msg;
+        cItem.appendChild(cMessage);
+
+        var cTime = document.createElement('div');
+        cTime.setAttribute('class', 'chatTime');
+        cTime.innerHTML = '8:00pm';
+
+        cItem.appendChild(cTime);
+
+        chatList.appendChild(cItem);
+
+        scrollToLastItem();
+        console.log('insertMessage');
+    }
+
+    function scrollToLastItem() {
+        var chatChildren = chatList.children, i, totalChatHeight = 0;
+        for (i = 0; i < chatChildren.length; i += 1) {
+            totalChatHeight += stringToNum(getStyle(chatChildren[i], 'height'));
+        }
+        chatList.scrollTop = totalChatHeight;
+    }
 }
 
 //////////////////
@@ -93,6 +154,20 @@ function getStyle(element, styleProperty) {
     return style;
 }
 
+//////////////////
+////STRING TO NUM
+//////////////////
 function stringToNum(str) {
     return parseInt(str, 10);
+}
+
+//////////////////
+////REMOVE ELEMENT
+//////////////////
+function removeElement (element) {
+    try {
+        element.remove();
+    } catch (err) {
+        element.parentNode.removeChild(element);
+    }
 }

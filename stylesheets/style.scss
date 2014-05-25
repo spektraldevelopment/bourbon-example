@@ -4,7 +4,7 @@
 @import "../bitters/bitters";
 
 //Mixins
-@mixin outline($colour:#EEEEEE) {
+@mixin outline($colour:#9f9f9f) {
   border: 1px solid $colour;
 }
 
@@ -15,27 +15,45 @@
   margin: 0;
 }
 
-//Elements
-section {
-  //@include outline();
-}
-
 //index structure
 #mainSection {
   @include outer-container;
-  @include outline(#9f9f9f);
+  @include outline();
   padding: 10px;
 
   h1 {
     font-family: $helvetica;
     font-size:24px;
   }
+
+  #startScreen {
+    @include outline();
+    display: block;
+    position: relative;
+    margin: 0 auto;
+    padding: 0;
+    width: 90%;
+
+    input {
+      width: 75%;
+      display: inline-block;
+    }
+
+    button {
+      @include button;
+      width: 75px;
+      display: inline-block;
+    }
+  }
+
+
   #userSection {
     @include span-columns(3);
     margin: 0;
     padding: 0;
 
     ul {
+      @include outline();
       background-color: #eeeeee;
       list-style-type: none;
       margin:0 10px 0 0;
@@ -50,7 +68,7 @@ section {
   #chatSection {
     @include span-columns(9);
     #chatList {
-
+      @include outline();
       height: 200px;
       overflow-y: scroll;
 
@@ -80,6 +98,7 @@ section {
 
   #messageSection {
     @include span-columns(12);
+    margin: 10px 0 0 0;
     button {
       @include button;
       position: relative;

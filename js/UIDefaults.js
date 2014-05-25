@@ -2,13 +2,25 @@
     "use strict";
     var UIDefaults = {};
 
-    UIDefaults.textArea = function (ta) {
-        attachEventListener(ta, 'click', onMessageFocus);
+    UIDefaults.textArea = function (element) {
+        attachEventListener(element, 'click', onTextFocus);
 
-        function onMessageFocus(evt) {
-            console.log("message focus");
-            ta.innerHTML = '';
-            detachEventListener(ta, 'click', onMessageFocus);
+        function onTextFocus(evt) {
+            element.innerHTML = '';
+            detachEventListener(element, 'click', onTextFocus);
+        }
+    }
+
+    UIDefaults.list = function (element) {
+
+    }
+
+    UIDefaults.input = function (element) {
+        attachEventListener(element, 'click', onInputFocus);
+        function onInputFocus(evt) {
+            console.log('input focus');
+            element.value = '';
+            detachEventListener(element, 'click', onInputFocus);
         }
     }
 
